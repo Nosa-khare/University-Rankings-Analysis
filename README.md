@@ -153,7 +153,7 @@ This retrieves the column names of a DataFrame df and converts them into a Pytho
 The columns attribute of a DataFrame contains the column labels or names. By calling the to_list() method on the columns attribute, the column names are extracted and converted into a list.
 
 
-# rename column
+# rename columns
  a function rename_columns that renames the columns of a DataFrame based on a provided dictionary. 
  
  ```python
@@ -167,7 +167,7 @@ The columns attribute of a DataFrame contains the column labels or names. By cal
 The rename_columns function, easily renames the columns passing the DataFrame and a dictionary mapping the current column names to the desired new names. The function modifies the DataFrame in place and returns it.
 
 
-### Rearrange column positions
+# Rearrange column positions
 
 The code snippet creates a new DataFrame df_sorted_cols by selecting specific columns from the df_renamed DataFrame. It then displays information about the DataFrame using the info() method and shows the first few rows using the head() method.
 
@@ -178,7 +178,7 @@ df_renamed.iloc[:, [13, 1, 2, 0, *range(3,13)]]
 code selects columns from df_renamed based on their indices. It selects the 14th column (index 13), 2nd column (index 1), 3rd column (index 2), 1st column (index 0), and columns 4 to 13 (indices 3 to 12) in that order. This rearrangement of columns is stored in the df_sorted_cols DataFrame.
 
 
-### Missing Values
+# Missing Values
 
 The code snippet assigns the df_sorted_cols DataFrame to the variable df and then prints the count of missing values in each column using the isna().sum() method.
 
@@ -189,7 +189,7 @@ creates a new DataFrame df_null_rows by selecting rows from df that contain at l
 Finally, the code displays the df_null_rows DataFrame, which contains the rows with missing values.
 
 
-#### Categorize the missing data by the 'year' column
+## Categorize the missing data by the 'year' column
 
 The code categorizes the missing data from the df_null_rows DataFrame based on the 'year' column. It retrieves the unique values of the 'year' column in the missing data using the unique() method and converts the result to a list using the tolist() method.
 
@@ -197,7 +197,7 @@ inspect data of each missing yeaR
 This code assigns the filtered data to the variable data_2012 by filtering df based on the condition df['year'] == '2012'. It then uses data_2012.isna().sum() to calculate the missing value count for each column in data_2012. Finally, it prints the result with a formatted string that includes the year in the output.
 
 
-#### Clean missing data
+## Clean missing data
 
 Filtering and updating the "broad_impact" column for the years 2012 and 2013 based on specific conditions and values from other columns.
 
@@ -231,7 +231,7 @@ If no rows exist for the institution in both 2014 and 2015, sets the 'broad_impa
 If rows exist, calculates the mean of the 'broad_impact' values at index 0 from row_2014 and row_2015 and assigns it to the 'broad_impact' column of the corresponding rows in 2013.
 
 
-### Duplicates
+# Duplicates
 
 ```python
 years = df['year'].unique().tolist()
