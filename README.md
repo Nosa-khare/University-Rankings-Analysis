@@ -24,12 +24,12 @@ Data - https://github.com/Nosa-khare/python-assessment/tree/main/dataset
 - [Data Integration](#data-integration)
   - [Import csv files](#import-csv-files)
   - [Merge dataframes](#merge-dataframes)
-- [Data Cleaning](#data-cleaning)
+- [Data Cleaning](#data-cleaning)  
   - [Rename columns](#rename-columns)
   - [Rearrange column positions](#rearrange-column-positions)
   - [Missing Values](#missing-values)
-    - [Categorize the missing data by the 'year' column](#categorize-the-missing-data-by-the-year-column)
-    - [Clean missing data](#clean-missing-data)
+    - [Categorize the missing data by the 'year' column](##categorize-the-missing-data-by-the-year-column)
+    - [Clean missing data](##clean-missing-data)
   - [Duplicates](#duplicates)
 - [Data Exploration](#data-exploration)
   - [Correlation Analysis](#correlation-analysis)
@@ -45,29 +45,36 @@ Data - https://github.com/Nosa-khare/python-assessment/tree/main/dataset
 
 
 
-
-
-
-
-
-
-
-
 ## Installation
-Outline the steps required to set up and run your project. Include any prerequisites, dependencies, or special instructions that are necessary for installation.
-- Download anaconda/python
+To run this project, please ensure that Python is installed on your machine. You can install Python by downloading it from the official Python website (https://www.python.org/) or by using the Anaconda distribution, which provides a comprehensive Python environment with many useful packages pre-installed.
 
+Please make sure to install a compatible version of Python (version 3.9 and above). 
+
+Once Python is installed, you can proceed with setting up the project environment and installing any necessary dependencies as mentioned in the project instructions.
+
+
+## Dependencies
+The following dependencies are required to run the project:
+
+matplotlib version: 3.5.2
+numpy version: 1.21.5
+pandas version: 1.4.4
+plotly version: 5.9.0
+scipy version: 1.9.1
+seaborn version: 0.11.2
+scikit-learn version: 1.0.2
+
+You can install these dependencies by running the following command:
+```pip install matplotlib numpy pandas plotly scipy seaborn scikit-learn```
 
 
 ## Data
-We have chosen a tabular global University ranking dataset from The Center for World University Rankings (CWUR) for this project. 
+For this project, we opted to utilize a global University ranking dataset sourced from The Center for World University Rankings (CWUR). The dataset spans the years 2012 to 2017 and encompasses 4,200 entries with 14 columns, encompassing information on world rankings, quality, publications, and scores of various institutions. 
 
-The dataset contains information about various institutions across years, 2012 - 2017 . The dataset includes 4,200 entries with 14 columns, providing information on institutions' ranks, quality, publications, and scores. This dataset allows us to delve into data analysis to uncover insights and visualize trends within the data that can be crucial for universities to improve educational and research outcomes.
+This dataset offers an opportunity for in-depth data analysis, enabling us to uncover valuable insights and visualize trends that can help inform universities efforts to improve educational and research standards.Initially, we utilized a pre-cleaned version of the dataset available on Kaggle, but upon realizing the need for an update, we conducted web scraping directly from the CWUR main website. This update was necessary due to changes in variables collected stemming from the organization's updated methodology.
 
-Our initial source was a cleaned version on Kaggle, but we discovered it needed an update, which required we extract from the original source.
 
-download here: https://github.com/Nosa-khare/python-assessment/tree/main/dataset
-
+download data files here: https://github.com/Nosa-khare/python-assessment/tree/main/dataset
 
 
 ## Data Integration
@@ -142,7 +149,7 @@ The merged dataframe is returned as the output of the function. In the provided 
 ## Data Cleaning
 
 
-#### get column names
+### get column names
 
 ```python
 df.columns.to_list() 
@@ -153,7 +160,7 @@ This retrieves the column names of a DataFrame df and converts them into a Pytho
 The columns attribute of a DataFrame contains the column labels or names. By calling the to_list() method on the columns attribute, the column names are extracted and converted into a list.
 
 
-### rename columns
+# rename column names
  a function rename_columns that renames the columns of a DataFrame based on a provided dictionary. 
  
  ```python
