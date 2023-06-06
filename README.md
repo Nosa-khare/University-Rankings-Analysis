@@ -20,14 +20,7 @@ Data - https://github.com/Nosa-khare/python-assessment/tree/main/dataset
 
 
 - [Installation](#installation)
-- [Usage](#usage)
-- [Data](#data)
-- [Models](#models)
-- [Results](#results)
-- [Contributing](#contributing)
-- [License](#license)
-- [Contact Information](#contact-information)
-
+- [Dataset](#data)
 - [Data Integration](#data-integration)
   - [Import csv files](#import-csv-files)
   - [Merge dataframes](#merge-dataframes)
@@ -47,11 +40,37 @@ Data - https://github.com/Nosa-khare/python-assessment/tree/main/dataset
     - [Hypothesis 3: Universities with a higher number of patents also have higher scores](#hypothesis-3-universities-with-a-higher-number-of-patents-also-have-higher-scores)
   - [Research Question 3](#research-question-3)
   - [Research Question 4](#research-question-4)
+  - [Research Question 5](#research-question-5)
+  - [Research Question 6](#research-question-6)
+
+
+
+
+
+
+
+
+
+
+
+## Installation ---------------------------------
+Outline the steps required to set up and run your project. Include any prerequisites, dependencies, or special instructions that are necessary for installation.
+- Download anaconda/python
+
+
+
+## Data
+We have chosen a tabular global University ranking dataset from The Center for World University Rankings (CWUR) for this project. 
+
+The dataset contains information about various institutions across years, 2012 - 2017 . The dataset includes 4,200 entries with 14 columns, providing information on institutions' ranks, quality, publications, and scores. This dataset allows us to delve into data analysis to uncover insights and visualize trends within the data that can be crucial for universities to improve educational and research outcomes.
+
+Our initial source was a cleaned version on Kaggle, but we discovered it needed an update, which required we extract from the original source.
+
+download here: https://github.com/Nosa-khare/python-assessment/tree/main/dataset
 
 
 
 ## Data Integration
-
 
 ### Get CSV Files
 The purpose of this code is to retrieve a list of CSV files from a specified directory.
@@ -87,13 +106,14 @@ def import_with_year_column(csv_file):
     df['year'] = year
     return df
 ```
-This code defines a function called import_with_year_column() that takes a CSV file path as input and returns a Pandas DataFrame. It performs the following steps:
+This code defines a function called import_with_year_column() that takes a CSV file path as input and returns a Pandas DataFrame.
 
-Extracts the base name of the CSV file from the given csv_file path.
-Extracts the year from the file name by slicing the file_basename string assuming the year is present in positions 9 to 12 (inclusive).
-Reads the CSV file using Pandas' read_csv() function.
-Adds a new column called 'year' to the DataFrame df and assigns it the value of the year variable.
-Returns the modified DataFrame.
+It extracts the base name of the CSV file from the given csv_file path. Then, it extracts the year from the file name by slicing the file_basename string assuming the year is present in positions 9 to 12, and reads the CSV file using Pandas' read_csv() function.
+
+A new column called 'year' is added to the DataFrame df and assigns it the value of the year variable. 
+
+the function then returns the modified DataFrame.
+
 To use this function, call import_with_year_column() with the path to the desired CSV file as the argument. The function will return a DataFrame with an additional 'year' column based on the file name.
 
 
@@ -102,9 +122,11 @@ To use this function, call import_with_year_column() with the path to the desire
 The merge_df_rows() merges rows from multiple CSV files into a single dataframe. It checks that the CSV files have the same column structure and contain a "year" column.
 
 #### Usage:
+```python
 csv_files_path = [dataset_dir + '\\' + csv_file for csv_file in csv_files]
 df = merge_df_rows(csv_files_path)
 df_merged = df
+```
 
 #### Function Signature:
 def merge_df_rows(csv_paths)
@@ -129,6 +151,7 @@ df.columns.to_list()
 This retrieves the column names of a DataFrame df and converts them into a Python list.
 
 The columns attribute of a DataFrame contains the column labels or names. By calling the to_list() method on the columns attribute, the column names are extracted and converted into a list.
+
 
 # rename column names
  a function rename_columns that renames the columns of a DataFrame based on a provided dictionary. 
@@ -325,8 +348,6 @@ The title() function sets the title of the plot, and axis('off') removes the axi
 Overall, this code segment includes visualization techniques to represent the correlations: a heatmap and a network graph.
 
 
-
-
 ### Research Question 1
 
 This code segment focuses on exploring the total number of institutions by country in the dataset and analyzing the top 5 countries in more detail.
@@ -361,7 +382,6 @@ sns.barplot(data=top_20_countries,
 A bar chart is created using sns.barplot() to visualize the total number of institutions by country for the top 20 countries. The 'country' column is plotted on the x-axis, 'total_institutions' is plotted on the y-axis, and the bars are colored in 'royalblue'. The chart is displayed using plt.show().
 
 The code then focuses on the top 5 countries, stored in the top_5_countries variable. For each country, it creates a group DataFrame containing only the data for that country. The country name, the group DataFrame, and statistical analysis (using describe()) are printed for each country.
-
 
 
 ### Research Question 2
@@ -427,6 +447,7 @@ Inverts the y-axis scale so that lower rank values (higher performance) appear a
 
 plt.show(): Displays the plot.
 
+
 ### Research Question 4
 
 This code segment calculates the correlation matrix for the variables in the dataset and creates a heatmap visualization using seaborn's heatmap function. The correlation matrix measures the relationships between different variables, including the number of students and other factors. The heatmap provides a color-coded representation of these correlations.
@@ -442,7 +463,6 @@ df["university_type"] = np.where(df["country"] == "USA", "Private", "Public")
 print(df["university_type"])
 ```
 It creates a new column in the DataFrame df called "university_type" based on the condition that if the country is "USA," the university type is set as "Private," otherwise it is set as "Public." The np.where function is used to apply this condition.
-
 
 
 ### Research Question 6
@@ -461,6 +481,7 @@ score = accuracy_score(y_test, predictions)
 The accuracy of the predictions is calculated using the accuracy_score function from scikit-learn, comparing the predicted values (predictions) with the actual values (y_test).
 
 This provides a way to assess the model's performance in predicting university rankings or performance. The variable "predictions" contains the predicted values for the test data.
+
 
 ## Conclusion
 
