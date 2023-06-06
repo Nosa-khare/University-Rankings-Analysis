@@ -53,7 +53,7 @@ Data - https://github.com/Nosa-khare/python-assessment/tree/main/dataset
 
 
 
-## Installation ---------------------------------
+## Installation
 Outline the steps required to set up and run your project. Include any prerequisites, dependencies, or special instructions that are necessary for installation.
 - Download anaconda/python
 
