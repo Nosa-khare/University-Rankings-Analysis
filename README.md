@@ -8,11 +8,11 @@ Data - https://github.com/Nosa-khare/python-assessment/tree/main/dataset
 
 
 ### Members
-    Olaide oludare Wasiu | sS216546
-    Nosakhare Edokpayi | S4214240
-    Remsha Farooq | S4218275
-    Uchechukwu Osita Ikwu | S4216861
-    Yusuf Segun Ajibade | S4216782
+    Olaide oludare Wasiu |
+    Nosakhare Edokpayi |
+    Remsha Farooq |
+    Uchechukwu Osita Ikwu |
+    Yusuf Segun Ajibade |
 
 
 
