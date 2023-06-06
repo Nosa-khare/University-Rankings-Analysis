@@ -20,6 +20,7 @@ Data - https://github.com/Nosa-khare/python-assessment/tree/main/dataset
 
 
 - [Installation](#installation)
+  - [Dependencies](#dependencies)
 - [Dataset](#data)
 - [Data Integration](#data-integration)
   - [Import csv files](#import-csv-files)
@@ -52,8 +53,7 @@ Please make sure to install a compatible version of Python (version 3.9 and abov
 
 Once Python is installed, you can proceed with setting up the project environment and installing any necessary dependencies as mentioned in the project instructions.
 
-
-## Dependencies
+### Dependencies
 The following dependencies are required to run the project:
 
 matplotlib version: 3.5.2
