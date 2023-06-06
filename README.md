@@ -50,7 +50,6 @@ Data - https://github.com/Nosa-khare/python-assessment/tree/main/dataset
 
 
 
-
 ## Data Integration
 
 
@@ -156,7 +155,6 @@ df_renamed.iloc[:, [13, 1, 2, 0, *range(3,13)]]
 code selects columns from df_renamed based on their indices. It selects the 14th column (index 13), 2nd column (index 1), 3rd column (index 2), 1st column (index 0), and columns 4 to 13 (indices 3 to 12) in that order. This rearrangement of columns is stored in the df_sorted_cols DataFrame.
 
 
-
 ### Missing Values
 
 The code snippet assigns the df_sorted_cols DataFrame to the variable df and then prints the count of missing values in each column using the isna().sum() method.
@@ -236,3 +234,236 @@ The rows with duplicates are appended to the duplicate_rows DataFrame using pd.c
 
 Finally, the code prints the duplicate_rows DataFrame.
 
+
+
+
+## Data Exploration
+
+
+### Correlation Analysis
+
+This code computes the correlation matrix using the corr() function on the DataFrame df. The resulting correlation matrix is stored in the corr_matrix variable.
+
+```python
+# Compute the correlation matrix
+corr_matrix = df.corr()
+corr_matrix
+```
+This code computes the correlation matrix using the corr() function on the DataFrame df. The resulting correlation matrix is stored in the corr_matrix variable.
+
+
+```python
+# Create a heatmap using seaborn
+plt.figure(figsize=(10, 8))
+sns.heatmap(corr_matrix, cmap='coolwarm', annot=True, fmt=".2f", vmin=-1, vmax=1)
+
+plt.title('Correlation Heatmap', fontsize=12, fontweight='bold')
+
+# Adjust the xtick rotation
+plt.xticks(rotation=45)
+
+plt.show()
+```
+This then creates a heatmap using the seaborn library. The heatmap visualizes the correlation matrix, with higher values indicated by warmer colors and lower values indicated by cooler colors. 
+The ```python cmap='coolwarm'``` parameter sets the color palette for the heatmap. The ```python annot=True``` parameter displays the correlation values in each cell. 
+```python The fmt=".2f" ``` parameter formats the values to two decimal places. The ```python vmin and vmax ``` parameters set the range of values for the color scale. The title and x-axis tick labels are adjusted for better readability.
+
+
+### Strong correlation
+
+This section calculates strong correlations among variables.  
+
+```python 
+# Set a threshold for strong correlation
+strong_correlation_threshold = 0.8
+```
+It sets a threshold for strong correlation and finds the variables that have correlations above this threshold.
+
+```python
+# Find variables with strong correlations
+strong_correlation_columns = {}
+
+for i in range(len(corr_matrix.columns)):
+    correlations = corr_matrix_abs.iloc[i, :]
+    strong_correlations = correlations[correlations >= strong_correlation_threshold]
+    if len(strong_correlations) > 1:
+        strong_correlation_columns[corr_matrix.columns[i]] = correlations
+```
+This code iterates over the columns of the correlation matrix and finds the variables (columns) that have strong correlations with other variables. It creates a dictionary strong_correlation_columns where the keys are the variable names with strong correlations, and the values are the corresponding correlation values.
+
+#### heatmap
+it creates a heatmap using the heatmap() function from the seaborn library. The heatmap visualizes the correlation values, where higher values are represented by warmer colors.
+
+```python
+sns.heatmap(correlation_matrix, cmap='coolwarm', annot=True, fmt=".2f", vmin=-1, vmax=1)
+```
+The cmap='coolwarm' argument sets the color map, annot=True displays the correlation values on the heatmap, fmt=".2f" formats the displayed values as floating-point numbers with two decimal places, and vmin and vmax set the range of values for the color map. 
+
+Finally, the title() function sets the title of the plot, and xticks(rotation=45) adjusts the rotation of the x-axis tick labels.
+
+#### network graph 
+This code segment visualizes the strong correlations as a network graph. It uses the networkx library to create a graph (G). 
+```python
+# Add edges to the graph based on the strong correlations
+for variable1 in strong_correlation_columns:
+    for variable2 in strong_correlation_columns[variable1].index:
+        G.add_edge(variable1, variable2)
+```
+Then, it adds edges to the graph based on the strong correlations found earlier. 
+
+The layout of the graph is set using spring_layout, which positions the nodes using the Fruchterman-Reingold force-directed algorithm. 
+
+```python
+# Draw the nodes and edges
+nx.draw_networkx_nodes(G, pos, node_color='skyblue', node_size=500)
+nx.draw_networkx_edges(G, pos, edge_color='gray')
+```
+The draw_networkx_nodes and draw_networkx_edges functions are used to draw the nodes and edges of the graph. Labels are added to the nodes using draw_networkx_labels. 
+
+The title() function sets the title of the plot, and axis('off') removes the axis from the plot. Finally, the graph is displayed using plt.show().
+
+Overall, this code segment includes visualization techniques to represent the correlations: a heatmap and a network graph.
+
+
+
+
+### Research Question 1
+
+This code segment focuses on exploring the total number of institutions by country in the dataset and analyzing the top 5 countries in more detail.
+
+
+```python
+df_uc = pd.read_csv('cwur_cleaned.csv')
+```
+The line loads the dataset from a CSV file into a DataFrame called df_uc. The subsequent df = df_uc line assigns the DataFrame to df for further processing.
+
+```python
+def sum_institutions_by_country(df):
+    country_totals = df.groupby('country')['institution'].nunique().reset_index()
+    country_totals.columns = ['country', 'total_institutions']
+    country_totals['total_institutions'] = df.groupby('country')['institution'].nunique().values
+    
+    return country_totals
+```
+The sum_institutions_by_country() function calculates the total number of institutions by country. It uses the groupby() function to group the data by country and then counts the unique institutions within each group using nunique(). The function returns a DataFrame country_totals with two columns: 'country' and 'total_institutions'.
+
+The country_aggregate variable stores the result of calling sum_institutions_by_country(df), which computes the total number of institutions by country using the provided DataFrame df.
+
+The sorted_country_aggregate variable sorts the country_aggregate DataFrame by the 'total_institutions' column in descending order, giving a sorted representation of countries based on the number of institutions.
+
+The top_20_countries variable selects the top 20 countries with the highest institution counts from the sorted_country_aggregate DataFrame.
+
+```python
+sns.barplot(data=top_20_countries, 
+            x='country', y='total_institutions', 
+            color='royalblue', saturation=0.7, ci=None)
+```
+A bar chart is created using sns.barplot() to visualize the total number of institutions by country for the top 20 countries. The 'country' column is plotted on the x-axis, 'total_institutions' is plotted on the y-axis, and the bars are colored in 'royalblue'. The chart is displayed using plt.show().
+
+The code then focuses on the top 5 countries, stored in the top_5_countries variable. For each country, it creates a group DataFrame containing only the data for that country. The country name, the group DataFrame, and statistical analysis (using describe()) are printed for each country.
+
+
+
+### Research Question 2
+
+This code segment investigates how different factors contribute to a university's overall ranking.
+
+For each HYPOTHESIS, the correlation matrix is calculated for the variables 'publications', 'influence', and 'citations'. The correlation matrix is then visualized as a heatmap using sns.heatmap(). The resulting correlation coefficients and p-values are printed.
+
+
+### Research Question 3
+
+This code segment analyzes the performance of universities from different countries in terms of overall ranking and individual factors.
+
+First, the code calculates the average university ranking by country using the groupby function and the mean aggregation. The results are sorted and displayed in a bar plot.
+
+```python
+factors = ['education_quality', 'alumni_employment', 'faculty_quality', 'publications', 'influence', 'citations']
+
+# Iterate through each factor and plot the average scores by country
+for factor in factors:
+    factor_ranking = df.groupby('country')[factor].mean().reset_index()
+    sorted_factor_ranking = factor_ranking.sort_values(factor)
+    top_10 = sorted_factor_ranking.head(10)
+    print(top_10)
+    print()
+
+
+    plt.figure(figsize=(12, 6))
+    sns.barplot(x=factor, y='country', data=top_10, color='royalblue' )
+    plt.xlabel(f'Average Overall Rankings', fontsize=12)
+    plt.ylabel('Country', fontsize=11)
+
+    plt.title(f'Average {factor.capitalize()} Rankings by Country', fontsize=14)
+    plt.yticks(fontsize=12)
+
+    plt.show()
+
+```
+Next, the code analyzes individual factors such as education quality, alumni employment, faculty quality, publications, influence, and citations. For each factor, the average scores by country are calculated using the groupby function and visualized in separate bar plots.
+
+```python
+# Calculate the yearly average ranking per institution
+yearly_avg_ranking = df.groupby(['year', 'institution'])['world_rank'].mean().reset_index()
+
+top_50_rankings = yearly_avg_ranking.sort_values('world_rank').head(50)
+
+# Define a formatting function
+def format_rank(rank):
+    return int(rank)
+
+# Apply the formatting function to the 'world_rank' column
+top_50_rankings['world_rank'] = top_50_rankings['world_rank'].apply(format_rank)
+
+print(top_50_rankings)
+
+```
+Lastly, the code focuses on the ranking trend for individual institutions over the years. The yearly average ranking per institution is calculated, and the top 50 rankings are selected. The code then plots the average ranking trend for each institution using line plots, with each institution
+
+```python
+plt.gca().invert_yaxis()
+```
+Inverts the y-axis scale so that lower rank values (higher performance) appear at the top of the graph.
+
+plt.show(): Displays the plot.
+
+### Research Question 4
+
+This code segment calculates the correlation matrix for the variables in the dataset and creates a heatmap visualization using seaborn's heatmap function. The correlation matrix measures the relationships between different variables, including the number of students and other factors. The heatmap provides a color-coded representation of these correlations.
+
+
+### Research Question 5
+
+This segment of code aims to explore and compare the performance, ranking, and resources of public and private universities.
+
+```python
+# Create a new column indicating university type (public or private)
+df["university_type"] = np.where(df["country"] == "USA", "Private", "Public")
+print(df["university_type"])
+```
+It creates a new column in the DataFrame df called "university_type" based on the condition that if the country is "USA," the university type is set as "Private," otherwise it is set as "Public." The np.where function is used to apply this condition.
+
+
+
+### Research Question 6
+
+This code segment aims to predict a university's future performance or ranking using a decision tree algorithm. It splits it into training and testing sets.
+
+```python
+predictions = model.predict(x_test)
+```
+The code applies predictions on the test data (x_test) using the trained model (model.predict).
+
+```python
+score = accuracy_score(y_test, predictions)
+```
+
+The accuracy of the predictions is calculated using the accuracy_score function from scikit-learn, comparing the predicted values (predictions) with the actual values (y_test).
+
+This provides a way to assess the model's performance in predicting university rankings or performance. The variable "predictions" contains the predicted values for the test data.
+
+## Conclusion
+
+Summarize the key findings and insights from your data science project.
+
+Feel free to adjust the sections and their descriptions according to your specific project needs. Remember to provide clear explanations, code instructions, and any necessary dependencies or assumptions for running the code successfully.
