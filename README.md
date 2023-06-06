@@ -153,7 +153,7 @@ This retrieves the column names of a DataFrame df and converts them into a Pytho
 The columns attribute of a DataFrame contains the column labels or names. By calling the to_list() method on the columns attribute, the column names are extracted and converted into a list.
 
 
-# rename column names
+# rename column
  a function rename_columns that renames the columns of a DataFrame based on a provided dictionary. 
  
  ```python
