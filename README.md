@@ -2,7 +2,7 @@
 
 
 ## Description
-In this data science project, our team of five students will work collaboratively to load and analyze a selected World University Ranking dataset . We will leverage the power of Python libraries such as pandas, numpy, seaborn, and matplotlib to accomplish our objectives.
+In this data science project, our team of five students will work collaboratively to load and analyze a selected World University Ranking dataset. We will leverage the power of Python libraries such as pandas, numpy, seaborn, and matplotlib to accomplish our objectives.
 
 Data - https://github.com/Nosa-khare/python-assessment/tree/main/dataset
 
@@ -47,11 +47,11 @@ Data - https://github.com/Nosa-khare/python-assessment/tree/main/dataset
 
 
 ## Installation
-To run this project, please ensure that Python is installed on your machine. You can install Python by downloading it from the official Python website (https://www.python.org/) or by using the Anaconda distribution, which provides a comprehensive Python environment with many useful packages pre-installed.
+To run this project, please ensure that Python is installed on your machine. You can install Python by downloading it from the official website (https://www.python.org/) or using the Anaconda distribution, which provides a comprehensive Python environment with many useful packages pre-installed.
 
-Please make sure to install a compatible version of Python (version 3.9 and above). 
+Please install a compatible version of Python (version 3.9 and above). 
 
-Once Python is installed, you can proceed with setting up the project environment and installing any necessary dependencies as mentioned in the project instructions.
+Once Python is installed, you can set up the project environment and install any necessary dependencies as mentioned in the project instructions.
 
 ### Dependencies
 The following dependencies are required to run the project:
@@ -69,9 +69,9 @@ You can install these dependencies by running the following command:
 
 
 ## Data
-For this project, we opted to utilize a global University ranking dataset sourced from The Center for World University Rankings (CWUR). The dataset spans the years 2012 to 2017 and encompasses 4,200 entries with 14 columns, encompassing information on world rankings, quality, publications, and scores of various institutions. 
+For this project, we utilised a global University ranking dataset from The Center for World University Rankings (CWUR). The dataset spans 2012 to 2017 and encompasses 4,200 entries with 14 columns, encompassing information on world rankings, quality, publications, and scores of various institutions. 
 
-This dataset offers an opportunity for in-depth data analysis, enabling us to uncover valuable insights and visualize trends that can help inform universities efforts to improve educational and research standards.Initially, we utilized a pre-cleaned version of the dataset available on Kaggle, but upon realizing the need for an update, we conducted web scraping directly from the CWUR main website. This update was necessary due to changes in variables collected stemming from the organization's updated methodology.
+This dataset offers an opportunity for in-depth data analysis, enabling us to uncover valuable insights and visualize trends that can help inform universities' efforts to improve educational and research standards. Initially, we utilized a pre-cleaned version of the dataset available on Kaggle, but upon realizing the need for an update, we conducted web scraping directly from the CWUR main website. This update was necessary due to changes in variables collected stemming from the organization's updated methodology.
 
 
 download data files here: [Dataset](https://github.com/Nosa-khare/World-University-Rankings-2012-2017/tree/main/dataset)
@@ -96,12 +96,12 @@ print(dataset_dir)
 
 This code defines a function called get_csv_files() that takes a single argument csv_path. It uses the os module to retrieve a list of all files in the specified directory. It then filters the list to include only files with the .csv extension. The function returns the list of CSV files.
 
-To use this function, construct the csv_path variable with the path to the directory containing the CSV files. Then, call the get_csv_files() function with the csv_path variable and assign the returned list of CSV files to the csv_files variable. Finally, print the list of CSV files and the dataset_dir variable.
+To use this function, construct the csv_path variable with the path to the CSV files' directory. Then, call the get_csv_files() function with the csv_path variable and assign the returned list of CSV files to the csv_files variable. Finally, print the list of CSV files and the dataset_dir variable.
 
 **Note:** Make sure the '/dataset' directory exists in the current working directory and contains the required CSV files (see Data section for download link).
 
 
-### Import csv files
+### Import CSV files
 
 The purpose of this code is to read a CSV file, extract the year from its file name, and add a new 'year' column to the DataFrame.
 
@@ -115,18 +115,18 @@ def import_with_year_column(csv_file):
 ```
 This code defines a function called import_with_year_column() that takes a CSV file path as input and returns a Pandas DataFrame.
 
-It extracts the base name of the CSV file from the given csv_file path. Then, it extracts the year from the file name by slicing the file_basename string assuming the year is present in positions 9 to 12, and reads the CSV file using Pandas' read_csv() function.
+It extracts the base name of the CSV file from the given csv_file path. Then, it extracts the year from the file name by slicing the file_basename string assuming the year is present in positions 9 to 12 and reads the CSV file using Pandas' read_csv() function.
 
 A new column called 'year' is added to the DataFrame df and assigns it the value of the year variable. 
 
 the function then returns the modified DataFrame.
 
-To use this function, call import_with_year_column() with the path to the desired CSV file as the argument. The function will return a DataFrame with an additional 'year' column based on the file name.
+To use this function, call import_with_year_column() with the path to the desired CSV file as the argument. The function will return a data frame with an additional 'year' column based on the file name.
 
 
-### Merge dataframes
+### Merge data frames
 
-The merge_df_rows() merges rows from multiple CSV files into a single dataframe. It checks that the CSV files have the same column structure and contain a "year" column.
+The merge_df_rows() merges rows from multiple CSV files into a single data frame. It checks that the CSV files have the same column structure and contain a "year" column.
 
 #### Usage:
 ```python
@@ -140,7 +140,7 @@ def merge_df_rows(csv_paths)
 
 The function takes a list of CSV file paths as input and compares the column names of subsequent CSV files with the first CSV file in the list, which serves as the reference dataframe. If the column names match, the rows are concatenated using pd.concat to create the merged dataframe. If the column names are not compatible, the CSV file is added to a list of incompatible files.
 
-After processing all CSV files, the function checks if any files were not compatible. If there are incompatible files, it prints a message indicating the files that are not compatible. Otherwise, it prints a success message.
+After processing all CSV files, the function checks if any files are not compatible. If there are incompatible files, it prints a message indicating the files that are not compatible. Otherwise, it prints a success message.
 
 The merged dataframe is returned as the output of the function. In the provided code snippet, it is assigned to the variable df_merged for further usage
 
@@ -171,7 +171,7 @@ The columns attribute of a DataFrame contains the column labels or names. By cal
 
  It also includes additional steps to standardize the column names by replacing whitespace characters with underscores and converting them to lowercase.
 
-The rename_columns function, easily renames the columns passing the DataFrame and a dictionary mapping the current column names to the desired new names. The function modifies the DataFrame in place and returns it.
+The rename_columns function easily renames the columns passing the DataFrame and a dictionary mapping the current column names to the desired new names. The function modifies the DataFrame in place and returns it.
 
 
 ### Rearrange column positions
@@ -190,7 +190,7 @@ code selects columns from df_renamed based on their indices. It selects the 14th
 The code snippet assigns the df_sorted_cols DataFrame to the variable df and then prints the count of missing values in each column using the isna().sum() method.
 
 ```python
-df_null_rows = df[df.isnull().any(axis=1)]
+df_null_rows = df[df.isnul l().any(axis=1)]
 ```
 creates a new DataFrame df_null_rows by selecting rows from df that contain at least one missing value. It uses the isnull().any(axis=1) condition to check for any missing values across the columns (axis=1).
 Finally, the code displays the df_null_rows DataFrame, which contains the rows with missing values.
